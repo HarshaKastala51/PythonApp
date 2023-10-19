@@ -18,7 +18,7 @@ jobs:
           password: ${{ secrets.DOCKER_HUB_PASSWORD }}
       - name: Building Docker Image
         run: |
-              docker build -t harshakastala/helloworld:${{ github.ref_name }}-${{ github.run_number }} -f . 
+              docker build -t harshakastala/helloworld:${{ github.ref_name }}-${{ github.run_number }} -f ./Dockerfile 
       - name: Container Image
         run: |
               docker push harshakastala/helloworld:${{ github.ref_name }}-${{ github.run_number}}
