@@ -1,11 +1,16 @@
 name: hello-world
-on: push
+on: 
+  push: 
+    branches: [ "main" ] 
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
 jobs:
-  my-job:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: my-step
-        run: echo "Hello World!"
+      - name: checkout
+        uses: actions/checkout@v3
       - name: Docker Login
         uses: docker/login-action@v3.0.0
         with: 
@@ -15,4 +20,4 @@ jobs:
         uses: docker/build-push-action@v5.0.0
         with:
           push: true
-          tags: harshakastala/pythonapp:v1
+          tags: helloworld:${{ github.ref_name }}-${{ github.run_number }}
