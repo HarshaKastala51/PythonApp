@@ -16,8 +16,12 @@ jobs:
         with: 
           username: harshakastala
           password: ${{ secrets.DOCKER_HUB_PASSWORD }}
-      - name: Build and push Docker images
-        uses: docker/build-push-action@v5.0.0
-        with:
-          push: true
-          tags: harshakastala/helloworld:${{ github.ref_name }}-${{ github.run_number }}
+      - name: Building Docker Image
+        run: |
+              docker build -t harshakastala/helloworld:${{ github.ref_name }}-${{ github.run_number }} -f . 
+      - name: Container Image
+        run: |
+              docker push harshakastala/helloworld:${{ github.ref_name }}-${{ github.run_number}}
+
+      
+      
