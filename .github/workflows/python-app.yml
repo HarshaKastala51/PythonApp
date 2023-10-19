@@ -6,3 +6,9 @@ jobs:
     steps:
       - name: my-step
         run: echo "Hello World!"
+      - name: Docker Login
+        uses: docker/login-action@v3.0.0
+        with: 
+          username: harshakastala
+          password: ${{ secret.DOCKER_HUB_PASSWORD }}
+      
